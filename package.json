@@ -1,0 +1,66 @@
+{
+  "name": "companies-p2p-sync",
+  "version": "1.0.0",
+  "description": "Local-first Arabic desktop app for managing companies with P2P Wi-Fi sync and MongoDB Atlas backup",
+  "main": "electron/main.js",
+  "author": "Senior Full-Stack Engineer",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:electron": "concurrently \"vite\" \"wait-on http://localhost:5173 && cross-env NODE_ENV=development electron .\"",
+    "build": "vite build",
+    "build:electron": "vite build && electron-builder --win --x64",
+    "preview": "vite preview",
+    "start": "electron ."
+  },
+  "dependencies": {
+    "pouchdb": "^9.0.0",
+    "flexsearch": "^0.7.43",
+    "axios": "^1.7.2",
+    "mongodb": "^6.8.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.19",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3",
+    "postcss": "^8.4.39",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^3.4.6",
+    "vite": "^5.3.4",
+    "wait-on": "^7.2.0"
+  },
+  "build": {
+    "appId": "com.company.companies-p2p-sync",
+    "productName": "Companies Sync",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "artifactName": "CompaniesSync-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "perMachine": true
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ]
+  }
+}

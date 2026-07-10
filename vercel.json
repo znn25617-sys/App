@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "functions": {
+    "api/*.js": {
+      "runtime": "@vercel/node"
+    }
+  },
+  "routes": [
+    { "src": "/api/sync", "dest": "/api/sync.js" },
+    { "src": "/api/companies", "dest": "/api/companies.js" }
+  ]
+}
